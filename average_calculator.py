@@ -1,65 +1,68 @@
-#created by @scherazada
-#the instruction to use the program
-print("""This is a Grade Calculator where you can Calculate
-Your Average per quarter type "help" to show the Instructions
-to use the program 
-	""")
+#@scherazade
+#IMPORTING SLEEP FUNCTION FROM TIME MODULE
+from time import sleep
 
-# the function for the input value and algorithm for calculating the average grade
-def grade_calculator():
-	name_of_user = input("Name: ")
-	grade_in_math = int(input("Your Grade in Math: "))
-	grade_in_eng = int(input("Your Grade in English: "))
-	grade_in_fil = int(input("Your Grade in Filipino: "))
-	grade_in_ap = int(input("Your Grade in AP: "))
-	grade_in_sci = int(input("Your Grade in Science: "))
-	grade_in_esp = int(input("Your Grade in ESP: " ))
-	grade_in_tle = int(input("Your Grade in TLE: "))
-	grade_in_mapeh = int(input("Your Grade in MAPEH: "))
-	ave_grade = ((grade_in_math + grade_in_eng + grade_in_fil + grade_in_ap + grade_in_sci + grade_in_esp + grade_in_tle + grade_in_mapeh) / 8 )
-	total_grade = (grade_in_math + grade_in_eng + grade_in_fil + grade_in_ap + grade_in_sci + grade_in_esp + grade_in_tle + grade_in_mapeh)
+print('TYPE "help" TO SHOW INSTRUCTIONS')
+#LIST FOR SUBJECTS
+subjects = ['Math', 'English', 'Science', 'Filipino', 'AP', 'ESP', 'TLE', 'MAPEH']
+#FUNCTION FOR THE ALGORITHM
+def main(total = 0):
+	name_of_user = input('Name: ')
+	#A FOR LOOP FOR GETTING THE INPUT FOR THE USER AND CALCULATING THE AVERAGE
+	for sub in subjects:
+		grade = int(input(f'Enter Grade in {sub}: '))
+		total += grade
+		ave_grade = total / 8
+	print("Calculating....")
+	sleep(1.3)
 	if ave_grade >= 90:
-		print("Total: " + str(total_grade))
-		print("Your Average is: "+ str(ave_grade))
-		print(name_of_user + " Congratulations!! You belong to with Honors :)")
+		print(f'Total: {total}')
+		sleep(0.65)
+		print(f'Average: {ave_grade}\nCongratulations!! {name_of_user}')
 	elif ave_grade < 75:
-		print("Total: " + str(total_grade))
-		print("Your Average is: "+ str(ave_grade))
-		print (name_of_user + " I'm sorry but you failed :(")
+		print(f'Total: {total}')
+		sleep(0.65)
+		print(f"Average: {ave_grade}\nI'm sorry {name_of_user} you failed :( try again next time")
 	else:
-		print("Total: " + str(total_grade))
-		print(name_of_user + " Your average is: " + str(ave_grade))
+		print(f"Total: {total}")
+		sleep(0.65)
+		print(f'Average: {ave_grade}')
 
-
-#the control flow and commands for the program
-try:
-	options = ""
+#FUNCTIONS FOR CONTROL FLOW AND COMMANDS FOR THE PROGRAM
+def control_flow():
 	while True:	
 		options = input(">> ")
-		if options == "help" or options == "Help":
-			print("""help - to show the instructions
+		if options == "help":
+			print("""NOTE:ALL COMMANDS MUST BE IN LOWERCASE
 about - to show the copyright law and contact information
 start - to start the program
 quit - to exit the program
 				""")
-		elif options == "about" or options == "About":
+		elif options == "about":
 			print("""Copyright 1999-2020 by Refsnes Data. All Rights Reserved.
 Contact me on scherazada@protonmail.com""")
-		elif options == "start" or options == "Start":
-			grade_calculator()		
+		elif options == "start":
+			main()
 			while True:
+				sleep(0.5)
 				retry = input("Do you want to try again? y/n: ")
 				if retry == "y" or retry == "Y":
-					grade_calculator()
+					main()
 				elif retry == "n" or retry == "N":
 					break
 				else:
 					print("Please choose the right options")
-		elif options == "quit" or options == "exit":
+		elif options == "quit":
 			print("bye, bye :)")
-			break 
+			exit()
 		else:
-			print("I don't understand please enter the right command")			
-except:	
-	print("Error:204 Please enter the right command or value")
-############################################COMPLETED#######################################################################################
+			print("I don't understand please enter the right command")
+
+try:
+	if __name__ == '__main__':
+		control_flow()
+		main()
+		sleep(5)
+except ValueError:
+	print("Error: ValueError")
+	exit()
